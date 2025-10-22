@@ -1,0 +1,30 @@
+import sys
+from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
+from PyQt6.QtCore import Qt
+
+class Ventana(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        # Crear un QLabel con texto
+        etiqueta = QLabel("Texto centrado")
+        etiqueta.setAlignment(Qt.AlignmentFlag.AlignCenter)  # Centrar el texto
+
+        # Crear layout vertical y añadir la etiqueta
+        layout = QVBoxLayout()
+        layout.addWidget(etiqueta)
+
+        # Asignar layout a la ventana
+        self.setLayout(layout)
+
+        # Configuración de la ventana
+        self.setWindowTitle("Ventana con etiqueta centrada")
+        self.resize(300, 200)
+
+        print("Arrancado")  # Mensaje al iniciar
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    ventana = Ventana()
+    ventana.show()
+    sys.exit(app.exec())
