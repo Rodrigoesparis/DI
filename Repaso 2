@@ -1,0 +1,47 @@
+import sys
+from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QComboBox, QCheckBox, QPushButton, QVBoxLayout
+from PyQt6.QtCore import Qt
+
+class Formulario(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        # Crear widgets
+        self.nombre_input = QLineEdit()
+        self.nombre_input.setPlaceholderText("Nombre")
+
+        self.rol_combo = QComboBox()
+        self.rol_combo.addItems(["Alumno", "Profe", "Invitado"])
+
+        self.acepto_checkbox = QCheckBox("Acepto normas")
+
+        self.enviar_btn = QPushButton("Enviar")
+        self.enviar_btn.clicked.connect(self.validar_formulario)
+
+        # Layout vertical
+        layout = QVBoxLayout()
+        layout.addWidget(QLabel("Formulario"))
+        layout.addWidget(self.nombre_input)
+        layout.addWidget(self.rol_combo)
+        layout.addWidget(self.acepto_checkbox)
+        layout.addWidget(self.enviar_btn)
+
+        self.setLayout(layout)
+        self.setWindowTitle("Formulario simple")
+        self.resize(300, 200)
+
+    def validar_formulario(self):
+        nombre = self.nombre_input.text()
+        rol = self.rol_combo.currentText()
+        acepta = self.acepto_checkbox.isChecked()
+
+        if not nombre or not acepta:
+            print("Faltan datos")
+        else:
+            print(f"Nombre: {nombre} | Rol: {rol} | Acepta: Sí")
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    ventana = Formulario()
+    ventana.show()
+    sys.exit(app.exec())
